@@ -9,14 +9,22 @@ import BlogSections from "./components/BlogSections";
 import Newsletter from "./components/Newsletter";
 import Footer from "./components/Footer";
 import FooterEnd from './components/FooterEnd';
+import { CartContextProvider } from "./context/CartContext";
+import { useState } from 'react';
+import Cart from "./components/Cart";
 
 function App() {
 
+  const [ showCart , setShowCart] =useState<any>(false);
+
   return (
     <>
+
+    <CartContextProvider>
+
    <main>
-      <Navbar/>
-      <MobileNav/>
+      <Navbar setShowCart = {setShowCart}/>
+      <MobileNav setShowCart = {setShowCart}/>
       <Hero/>
       <Category/>
       <FeatureSection/>
@@ -26,7 +34,13 @@ function App() {
       <Newsletter/>
       <Footer/>
       <FooterEnd/>
+      {
+        showCart && <Cart showCart={showCart} setShowCart={setShowCart}/>
+
+      }
+      
    </main>
+    </CartContextProvider>
       
         
     </>
